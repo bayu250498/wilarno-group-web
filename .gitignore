@@ -1,0 +1,28 @@
+# Log files
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+
+# Build output
+bin/
+build/
+*.exe
+*.out
+
+# Env/secret files
+.env
+*.env
+config.json
+
+# Node/npm (jika ada)
+node_modules/
+
+# Go modules cache (jika ada)
+/pkg/mod/ 

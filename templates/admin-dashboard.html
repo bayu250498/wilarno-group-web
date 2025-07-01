@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Wilarno Group</title>
+    <meta name="description" content="Admin dashboard untuk monitoring website Wilarno Group.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background:rgba(26,34,51,0.92); border-bottom:2px solid #2d3a4d;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/wilarno-group" aria-label="Logo Wilarno Group">
+                <span style="width:48px;height:48px;display:inline-block;">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="background:#1a2233; border-radius:50%;" xmlns="http://www.w3.org/2000/svg" aria-label="Logo Wilarno Group">
+                        <circle cx="24" cy="24" r="24" fill="#1a2233"/>
+                        <text x="50%" y="56%" text-anchor="middle" fill="#ffcc00" font-size="22" font-family="Segoe UI, Arial, sans-serif" font-weight="bold" dy=".3em">W</text>
+                        <text x="50%" y="80%" text-anchor="middle" fill="#fff" font-size="16" font-family="Segoe UI, Arial, sans-serif" font-weight="bold" dy=".3em">G</text>
+                    </svg>
+                </span>
+                <span class="ms-2 fw-bold d-none d-md-inline" style="font-size:1.2rem; color:#fff;">Wilarno Group</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/tentang-kami">Tentang Kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/bisnis-kami">Bisnis Kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/hubungi-kami">Hubungi Kami</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2">
+                <div class="list-group">
+                    <a href="#dashboard" class="list-group-item list-group-item-action active" data-bs-toggle="list">
+                        <i class="bi bi-speedometer2 me-2"></i>Dashboard
+                    </a>
+                    <a href="#analytics" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                        <i class="bi bi-graph-up me-2"></i>Analytics
+                    </a>
+                    <a href="#contacts" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                        <i class="bi bi-envelope me-2"></i>Contact Messages
+                    </a>
+                    <a href="#settings" class="list-group-item list-group-item-action" data-bs-toggle="list">
+                        <i class="bi bi-gear me-2"></i>Settings
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 col-lg-10">
+                <div class="tab-content">
+                    <!-- Dashboard Tab -->
+                    <div class="tab-pane fade show active" id="dashboard">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2>Dashboard</h2>
+                            <button class="btn btn-primary" onclick="refreshData()">
+                                <i class="bi bi-arrow-clockwise me-1"></i>Refresh
+                            </button>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h6 class="card-title">Total Visitors</h6>
+                                                <h3 id="totalVisitors">-</h3>
+                                            </div>
+                                            <div class="align-self-center">
+                                                <i class="bi bi-people-fill fs-1"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h6 class="card-title">Contact Messages</h6>
+                                                <h3 id="totalContacts">-</h3>
+                                            </div>
+                                            <div class="align-self-center">
+                                                <i class="bi bi-envelope-fill fs-1"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-warning text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h6 class="card-title">Today's Visitors</h6>
+                                                <h3 id="todayVisitors">-</h3>
+                                            </div>
+                                            <div class="align-self-center">
+                                                <i class="bi bi-calendar-check-fill fs-1"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-info text-white">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <h6 class="card-title">Server Status</h6>
+                                                <h3 id="serverStatus">Online</h3>
+                                            </div>
+                                            <div class="align-self-center">
+                                                <i class="bi bi-server fs-1"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Recent Page Visits</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="recentVisits" class="list-group list-group-flush">
+                                            <div class="text-center text-muted">
+                                                <i class="bi bi-hourglass-split fs-1"></i>
+                                                <p>Loading recent visits...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Recent Contact Messages</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="recentContacts" class="list-group list-group-flush">
+                                            <div class="text-center text-muted">
+                                                <i class="bi bi-hourglass-split fs-1"></i>
+                                                <p>Loading recent messages...</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analytics Tab -->
+                    <div class="tab-pane fade" id="analytics">
+                        <h2 class="mb-4">Analytics Data</h2>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">Visitor Analytics</h5>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="downloadAnalytics()">
+                                        <i class="bi bi-download me-1"></i>Download
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <pre id="analyticsData" class="bg-light p-3 rounded" style="max-height: 500px; overflow-y: auto; font-size: 0.875rem;">Loading analytics data...</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contacts Tab -->
+                    <div class="tab-pane fade" id="contacts">
+                        <h2 class="mb-4">Contact Messages</h2>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">All Contact Messages</h5>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="downloadContacts()">
+                                        <i class="bi bi-download me-1"></i>Download
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <pre id="contactsData" class="bg-light p-3 rounded" style="max-height: 500px; overflow-y: auto; font-size: 0.875rem;">Loading contact data...</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Tab -->
+                    <div class="tab-pane fade" id="settings">
+                        <h2 class="mb-4">Settings</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Email Configuration</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted">Email notification settings are configured in the server code.</p>
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            To enable email notifications, update the SMTP configuration in <code>main.go</code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">Security</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="text-muted">Security settings and access control.</p>
+                                        <div class="alert alert-warning">
+                                            <i class="bi bi-shield-exclamation me-2"></i>
+                                            Change default admin credentials in production environment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+        });
+
+        function loadDashboardData() {
+            // Load analytics data
+            fetch('/admin/analytics')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('analyticsData').textContent = data || 'No analytics data available';
+                    updateVisitStats(data);
+                })
+                .catch(error => {
+                    document.getElementById('analyticsData').textContent = 'Error loading analytics data';
+                    console.error('Error:', error);
+                });
+
+            // Load contacts data
+            fetch('/admin/contacts')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('contactsData').textContent = data || 'No contact data available';
+                    updateContactStats(data);
+                })
+                .catch(error => {
+                    document.getElementById('contactsData').textContent = 'Error loading contact data';
+                    console.error('Error:', error);
+                });
+        }
+
+        function updateVisitStats(data) {
+            if (data) {
+                const lines = data.split('\n').filter(line => line.trim());
+                document.getElementById('totalVisitors').textContent = lines.length;
+                
+                const today = new Date().toISOString().split('T')[0];
+                const todayVisits = lines.filter(line => line.includes(today)).length;
+                document.getElementById('todayVisitors').textContent = todayVisits;
+                
+                // Update recent visits
+                const recentVisits = lines.slice(-5).reverse();
+                const visitsHtml = recentVisits.map(line => {
+                    const parts = line.split('|');
+                    if (parts.length >= 2) {
+                        return `<div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>${parts[1].trim()}</strong>
+                                    <br><small class="text-muted">${parts[0].trim()}</small>
+                                </div>
+                                <span class="badge bg-primary rounded-pill">${parts[2]?.trim() || 'N/A'}</span>
+                            </div>
+                        </div>`;
+                    }
+                    return '';
+                }).join('');
+                document.getElementById('recentVisits').innerHTML = visitsHtml || '<div class="text-center text-muted">No recent visits</div>';
+            }
+        }
+
+        function updateContactStats(data) {
+            if (data) {
+                const lines = data.split('\n').filter(line => line.trim());
+                document.getElementById('totalContacts').textContent = lines.length;
+                
+                // Update recent contacts
+                const recentContacts = lines.slice(-5).reverse();
+                const contactsHtml = recentContacts.map(line => {
+                    const parts = line.split('|');
+                    if (parts.length >= 4) {
+                        return `<div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>${parts[2].trim()}</strong>
+                                    <br><small class="text-muted">${parts[3].trim()}</small>
+                                </div>
+                                <span class="badge bg-success rounded-pill">${parts[0].trim()}</span>
+                            </div>
+                        </div>`;
+                    }
+                    return '';
+                }).join('');
+                document.getElementById('recentContacts').innerHTML = contactsHtml || '<div class="text-center text-muted">No recent messages</div>';
+            }
+        }
+
+        function refreshData() {
+            loadDashboardData();
+        }
+
+        function downloadAnalytics() {
+            fetch('/admin/analytics')
+                .then(response => response.text())
+                .then(data => {
+                    downloadFile(data, 'analytics.txt', 'text/plain');
+                });
+        }
+
+        function downloadContacts() {
+            fetch('/admin/contacts')
+                .then(response => response.text())
+                .then(data => {
+                    downloadFile(data, 'contacts.txt', 'text/plain');
+                });
+        }
+
+        function downloadFile(content, filename, contentType) {
+            const blob = new Blob([content], { type: contentType });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                window.location.href = '/wilarno-group';
+            }
+        }
+    </script>
+</body>
+</html> 

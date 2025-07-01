@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://www.wilarnogroup.com/sitemap.xml 
